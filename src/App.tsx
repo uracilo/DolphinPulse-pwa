@@ -1,12 +1,15 @@
 import { BrowserSupport } from './components/BrowserSupport';
 import { ConnectionPanel } from './components/ConnectionPanel';
 import { HistoryList } from './components/HistoryList';
+import { InstallBanner } from './components/InstallBanner';
 import { LiveSignal } from './components/LiveSignal';
 import { useFlipperBle } from './hooks/useFlipperBle';
+import { usePwaInstall } from './hooks/usePwaInstall';
 import './App.css';
 
 export default function App() {
   const ble = useFlipperBle();
+  const pwa = usePwaInstall();
 
   return (
     <div className="app-shell">
@@ -20,6 +23,13 @@ export default function App() {
           Flipper Zero escucha 433.92 MHz y empuja cada código por BLE a esta PWA.
         </p>
       </header>
+
+      <InstallBanner
+        installed={pwa.installed}
+        canPrompt={pwa.canPrompt}
+        hint={pwa.hint}
+        onInstall={() => void pwa.install()}
+      />
 
       <BrowserSupport state={ble.state} btAvailable={ble.btAvailable} />
 

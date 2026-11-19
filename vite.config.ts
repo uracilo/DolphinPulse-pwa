@@ -17,6 +17,7 @@ export default defineConfig({
       minify: false,
       includeAssets: ['favicon.svg', 'icons/icon-192.png', 'icons/icon-512.png'],
       manifest: {
+        id: '/DolphinPulse-pwa/',
         name: 'DolphinPulse',
         short_name: 'DolphinPulse',
         description:
@@ -24,20 +25,25 @@ export default defineConfig({
         theme_color: '#0b3a4a',
         background_color: '#06232e',
         display: 'standalone',
-        orientation: 'portrait-primary',
-        start_url: base,
-        scope: base,
+        display_override: ['standalone', 'browser'],
+        start_url: '/DolphinPulse-pwa/?source=pwa',
+        scope: '/DolphinPulse-pwa/',
         lang: 'es',
+        dir: 'ltr',
+        categories: ['utilities', 'productivity'],
+        prefer_related_applications: false,
         icons: [
           {
             src: 'icons/icon-192.png',
             sizes: '192x192',
             type: 'image/png',
+            purpose: 'any',
           },
           {
             src: 'icons/icon-512.png',
             sizes: '512x512',
             type: 'image/png',
+            purpose: 'any',
           },
           {
             src: 'icons/icon-512.png',

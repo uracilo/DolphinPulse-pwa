@@ -77,6 +77,38 @@
   animation: rise-in 500ms ease both;
 }
 
+.notice-install {
+  border-color: rgba(45, 212, 191, 0.35);
+  background: rgba(45, 212, 191, 0.1);
+  color: #d5fff7;
+}
+
+.notice-ok {
+  border-color: rgba(45, 212, 191, 0.35);
+  background: rgba(45, 212, 191, 0.12);
+  color: #d5fff7;
+}
+
+.install-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.install-row p {
+  flex: 1 1 16rem;
+  margin: 0;
+  line-height: 1.45;
+}
+
+.install-hint {
+  margin: 0.75rem 0 0;
+  color: #9ec5be;
+  font-size: 0.9rem;
+}
+
 .layout {
   display: grid;
   gap: 1rem;
