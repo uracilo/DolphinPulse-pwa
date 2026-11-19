@@ -55,8 +55,25 @@ interface BluetoothRemoteGATTService {
   ): Promise<BluetoothRemoteGATTCharacteristic>;
 }
 
+interface BluetoothCharacteristicProperties {
+  readonly broadcast: boolean;
+  readonly read: boolean;
+  readonly writeWithoutResponse: boolean;
+  readonly write: boolean;
+  readonly notify: boolean;
+  readonly indicate: boolean;
+  readonly authenticatedSignedWrites: boolean;
+  readonly reliableWrite: boolean;
+  readonly writableAuxiliaries: boolean;
+}
+
 interface BluetoothRemoteGATTCharacteristic extends EventTarget {
   readonly value?: DataView;
+  readonly properties: BluetoothCharacteristicProperties;
+  readonly uuid: string;
+  readValue(): Promise<DataView>;
+  writeValue(value: BufferSource): Promise<void>;
+  writeValueWithoutResponse(value: BufferSource): Promise<void>;
   startNotifications(): Promise<BluetoothRemoteGATTCharacteristic>;
   stopNotifications(): Promise<BluetoothRemoteGATTCharacteristic>;
   addEventListener(

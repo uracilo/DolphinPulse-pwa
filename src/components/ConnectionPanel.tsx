@@ -68,6 +68,11 @@ export function ConnectionPanel({
           {error}
         </p>
       ) : null}
+      {!connected && !error ? (
+        <p className="status-meta">
+          Flipper → DolphinPulse → Test PWA (BLE advertising). Si pide PIN, acéptalo.
+        </p>
+      ) : null}
     </section>
   );
 }

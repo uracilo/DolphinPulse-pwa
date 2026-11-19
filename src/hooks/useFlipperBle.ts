@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { playPulseSound, unlockPulseSound } from '../audio/pulseSound';
 import {
   FlipperBleSession,
   isBluetoothAvailable,
@@ -46,6 +47,7 @@ export function useFlipperBle() {
     setLatest(event);
     setPulseToken((n) => n + 1);
     setHistory((prevHist) => [event, ...prevHist].slice(0, HISTORY_LIMIT));
+    playPulseSound();
   }, []);
 
   const connect = useCallback(async () => {
@@ -57,6 +59,7 @@ export function useFlipperBle() {
 
     setError(null);
     setState('connecting');
+    await unlockPulseSound();
 
     try {
       sessionRef.current?.disconnect();
@@ -98,6 +101,7 @@ export function useFlipperBle() {
   }, []);
 
   const simulate = useCallback(() => {
+    void unlockPulseSound();
     const code = `0x${Math.floor(Math.random() * 0xffffff)
       .toString(16)
       .toUpperCase()
