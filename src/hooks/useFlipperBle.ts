@@ -8,6 +8,7 @@ import { simulateProtecoEvent } from '../ble/parseDolphinJson';
 import type { BleConnectionState, DolphinPulseEvent } from '../types/dolphin';
 
 const HISTORY_LIMIT = 80;
+const DEBOUNCE_MS = 500;
 
 export function useFlipperBle() {
   const [state, setState] = useState<BleConnectionState>(() =>
@@ -21,6 +22,7 @@ export function useFlipperBle() {
   const [btAvailable, setBtAvailable] = useState<boolean | null>(null);
 
   const sessionRef = useRef<FlipperBleSession | null>(null);
+  const lastPushRef = useRef<{ code: string; at: number } | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -35,9 +37,15 @@ export function useFlipperBle() {
   }, []);
 
   const pushEvent = useCallback((event: DolphinPulseEvent) => {
+    const now = Date.now();
+    const prev = lastPushRef.current;
+    if (prev && prev.code === event.code && now - prev.at < DEBOUNCE_MS) {
+      return;
+    }
+    lastPushRef.current = { code: event.code, at: now };
     setLatest(event);
     setPulseToken((n) => n + 1);
-    setHistory((prev) => [event, ...prev].slice(0, HISTORY_LIMIT));
+    setHistory((prevHist) => [event, ...prevHist].slice(0, HISTORY_LIMIT));
   }, []);
 
   const connect = useCallback(async () => {
