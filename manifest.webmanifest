@@ -1,0 +1,42 @@
+{
+  "name": "DolphinPulse",
+  "short_name": "DolphinPulse",
+  "description": "Escucha controles Proteco 433.92 MHz desde Flipper Zero por BLE en tiempo real.",
+  "start_url": "/DolphinPulse-pwa/?source=pwa",
+  "display": "standalone",
+  "background_color": "#06232e",
+  "theme_color": "#0b3a4a",
+  "lang": "es",
+  "scope": "/DolphinPulse-pwa/",
+  "id": "/DolphinPulse-pwa/",
+  "display_override": [
+    "standalone",
+    "browser"
+  ],
+  "dir": "ltr",
+  "categories": [
+    "utilities",
+    "productivity"
+  ],
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
