@@ -1,0 +1,49 @@
+:root {
+  --bg-0: #041820;
+  --bg-1: #0b3a4a;
+  --bg-2: #125868;
+  --ink: #e8f7f4;
+  --ink-muted: #9ec5be;
+  --accent: #2dd4bf;
+  --accent-2: #5eead4;
+  --warn: #f0b429;
+  --danger: #ff7b72;
+  --panel: rgba(8, 36, 46, 0.72);
+  --stroke: rgba(148, 230, 214, 0.18);
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'Manrope', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--bg-0);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button {
+  font: inherit;
+}
+
+p,
+h1,
+h2 {
+  margin: 0;
+}
