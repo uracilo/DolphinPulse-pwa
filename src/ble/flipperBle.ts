@@ -64,8 +64,7 @@ export class FlipperBleSession {
     }
 
     const server = await device.gatt.connect();
-    const service = await server.getPrimaryService(FLIPPER_SERIAL_SERVICE);
-    const characteristic = await service.getCharacteristic(FLIPPER_SERIAL_RX);
+    const characteristic = await this.resolveRxCharacteristic(server);
 
     await characteristic.startNotifications();
     characteristic.addEventListener('characteristicvaluechanged', this.onValueChanged);
@@ -76,6 +75,28 @@ export class FlipperBleSession {
     this.lineBuffer.value = '';
 
     return device.name ?? 'Flipper Zero';
+  }
+
+  private async resolveRxCharacteristic(
+    server: BluetoothRemoteGATTServer,
+  ): Promise<BluetoothRemoteGATTCharacteristic> {
+    try {
+      const service = await server.getPrimaryService(FLIPPER_SERIAL_SERVICE);
+      return await service.getCharacteristic(FLIPPER_SERIAL_RX);
+    } catch {
+      // Fallback: some firmwares/custom builds expose RX under another primary service.
+      const services = await server.getPrimaryServices();
+      for (const service of services) {
+        try {
+          return await service.getCharacteristic(FLIPPER_SERIAL_RX);
+        } catch {
+          // keep looking
+        }
+      }
+      throw new Error(
+        'No se encontró el servicio Serial del Flipper. Abre Apps → Sub-GHz → DolphinPulse en el Flipper (con Bluetooth ON) e inténtalo de nuevo.',
+      );
+    }
   }
 
   disconnect(): void {

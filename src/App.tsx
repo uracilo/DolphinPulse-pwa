@@ -5,6 +5,7 @@ import { InstallBanner } from './components/InstallBanner';
 import { LiveSignal } from './components/LiveSignal';
 import { useFlipperBle } from './hooks/useFlipperBle';
 import { usePwaInstall } from './hooks/usePwaInstall';
+import { APP_VERSION } from './version';
 import './App.css';
 
 export default function App() {
@@ -15,6 +16,10 @@ export default function App() {
     <div className="app-shell">
       <div className="aurora" aria-hidden />
       <div className="wave-grid" aria-hidden />
+
+      <p className="version-badge" aria-label={`Versión ${APP_VERSION}`}>
+        v{APP_VERSION}
+      </p>
 
       <header className="hero">
         <p className="brand">DolphinPulse</p>

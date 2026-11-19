@@ -6,6 +6,24 @@
   overflow: hidden;
 }
 
+.version-badge {
+  position: absolute;
+  top: clamp(0.85rem, 3vw, 1.35rem);
+  right: clamp(0.85rem, 3vw, 1.35rem);
+  z-index: 2;
+  margin: 0;
+  padding: 0.28rem 0.55rem;
+  border: 1px solid var(--stroke);
+  border-radius: 999px;
+  background: rgba(4, 24, 32, 0.65);
+  color: var(--ink-muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  backdrop-filter: blur(8px);
+}
+
 .aurora {
   position: absolute;
   inset: -20% -10% auto;
