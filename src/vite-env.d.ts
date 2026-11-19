@@ -46,6 +46,7 @@ interface BluetoothRemoteGATTServer {
   connect(): Promise<BluetoothRemoteGATTServer>;
   disconnect(): void;
   getPrimaryService(service: BluetoothServiceUUID): Promise<BluetoothRemoteGATTService>;
+  getPrimaryServices(service?: BluetoothServiceUUID): Promise<BluetoothRemoteGATTService[]>;
 }
 
 interface BluetoothRemoteGATTService {
